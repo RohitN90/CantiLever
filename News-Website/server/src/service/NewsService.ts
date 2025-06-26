@@ -9,7 +9,11 @@ const getHeadLines = async (req: Request, res: Response) => {
   try {
     const { country } = req.body;
     const data = await axios.get(
+<<<<<<< HEAD
       `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${apiKey}`,
+=======
+      `https://newsdata.io/api/1/latest?apikey=${process.env.NEWS_DATA_KEY}&country=${country}`,
+>>>>>>> origin/main
     );
     if (!data) {
       res.status(404).json({ message: "News not found !" });
@@ -25,7 +29,11 @@ const getHeadLinesByCategory = async (req: Request, res: Response) => {
   try {
     const { country, category } = req.body;
     const data = await axios.get(
+<<<<<<< HEAD
       `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`,
+=======
+      `https://newsdata.io/api/1/latest?apikey=${process.env.NEWS_DATA_KEY}&category=${category}`,
+>>>>>>> origin/main
     );
 
     if (!data) {
@@ -42,7 +50,11 @@ const getHeadLinesByTopic = async (req: Request, res: Response) => {
   try {
     const topic: string = req.params.topic;
     const data = await axios.get(
+<<<<<<< HEAD
       `https://newsapi.org/v2/top-headlines?q=${topic}&apiKey=${apiKey}`,
+=======
+      `https://newsdata.io/api/1/latest?apikey=${process.env.NEWS_DATA_KEY}&q=${topic}`,
+>>>>>>> origin/main
     );
     if (!data) {
       res.status(404).json({ message: "News not found !" });
