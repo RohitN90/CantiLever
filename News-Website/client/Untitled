@@ -1,0 +1,93 @@
+"use client";
+import { PiEyeClosedBold } from "react-icons/pi";
+import { FaRegEye } from "react-icons/fa";
+import {
+  Box,
+  Field,
+  Icon,
+  Input,
+  InputGroup,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
+
+const Login = () => {
+  const [eyestate, setEyeState] = useState(true);
+
+  const handleViewPassword = () => {
+    setEyeState(!eyestate);
+  };
+  return (
+    <>
+      <div className="w-full h-screen grid grid-cols-2 justify-center items-center bg-transparent text-[#633e24]">
+        <div className="bg-amber-50 w-full h-full"></div>
+        <div className="w-full h-full grid justify-center items-center">
+          <Box
+            className="w-[400px] h-fit"
+            paddingInline={"10px"}
+            paddingBlock={"10px"}
+            color={"#633e24"}
+          >
+            <Text fontSize={"4xl"} fontWeight={"bolder"}>
+              Welcome Back! <br /> Glad to See you, Again
+            </Text>
+            <VStack gapY={"5"} marginY={"4"}>
+              <Field.Root required gapY={"3"}>
+                <Field.Label fontSize={"xl"}>
+                  Email <Field.RequiredIndicator />
+                </Field.Label>
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  css={{ "--focus-color": "black" }}
+                  _placeholder={{ color: "blackAlpha.600" }}
+                  color={"#633e24"}
+                  size={"lg"}
+                />
+                <Field.HelperText marginTop={"-1"} color={"#633e24"}>
+                  We'll never share you Email
+                </Field.HelperText>
+              </Field.Root>
+              <Field.Root>
+                <Field.Label fontSize={"xl"}>
+                  Password <Field.RequiredIndicator />
+                </Field.Label>
+                <InputGroup
+                  w={"full"}
+                  maxW={"sm"}
+                  endElement={
+                    <Icon
+                      bg="transparent"
+                      size={"2xl"}
+                      w={"30px"}
+                      h={"11"}
+                      color={"black"}
+                      onClick={() => {
+                        handleViewPassword();
+                      }}
+                    >
+                      {eyestate ? <PiEyeClosedBold /> : <FaRegEye />}
+                    </Icon>
+                  }
+                >
+                  <Input
+                    type={eyestate ? "password" : "text"}
+                    css
+                    placeholder="Enter your password"
+                    css={{ "--focus-color": "black" }}
+                    _placeholder={{ color: "blackAlpha.600" }}
+                    color={"#633e24"}
+                    size={"lg"}
+                  />
+                </InputGroup>
+              </Field.Root>
+            </VStack>
+          </Box>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Login;

@@ -6,7 +6,7 @@ dotenv.config();
 
 const authication = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.header("Authorization");
+    const token = await req.cookies.Token;
     if (!token) {
       res.status(401).json({
         message: "Access denied",
