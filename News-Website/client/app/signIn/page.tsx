@@ -18,6 +18,7 @@ import * as z from "zod/v4";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { zodiak, plus } from "@/public/fontExport";
+import axios from "axios";
 
 const schmea = z.object({
   email: z.email(),
@@ -39,8 +40,29 @@ const Login = () => {
     setEyeState(!eyestate);
   };
 
-  const handleSubmitData: SubmitHandler<IUser> = (data) => {
-    console.log(data);
+  const handleSubmitData: SubmitHandler<IUser> = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/signIn",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      console.log(response.data);
+    } catch (error: any) {
+      if (error.response) {
+        console.error("Error during sign-in:", error.response.data);
+        console.error("Status:", error.response.status);
+        console.error("Headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error setting up request:", error.message);
+      }
+    }
   };
   return (
     <>

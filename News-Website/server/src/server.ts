@@ -1,34 +1,25 @@
-import express, { Request, Response, urlencoded } from "express";
+import express, { Request, Response } from "express";
 import * as dotenv from "dotenv";
 import connect from "./db/connection";
 import AuthRouter from "./controllers/Auth";
 import authication from "./middleware/authMiddleware";
 import NewsRouter from "./controllers/News";
-<<<<<<< HEAD
 import cors from "cors";
-import methosMiddleware from "./middleware/methods";
-import cookieParser from "cookie-parser";
-=======
 
->>>>>>> origin/main
 connect();
 
 dotenv.config();
 const app = express();
-<<<<<<< HEAD
-app.use(cors());
-app.use(cookieParser());
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(methosMiddleware);
-=======
 
 // Widdleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Replace with your frontend's actual origin
+  }),
+);
 
->>>>>>> origin/main
 app.use("/auth", AuthRouter);
 app.use("/api", NewsRouter);
 
