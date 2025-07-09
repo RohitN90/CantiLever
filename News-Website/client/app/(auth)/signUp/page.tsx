@@ -78,6 +78,7 @@ const Login = () => {
                       <Input
                         type="text"
                         placeholder="eg. John"
+                        suppressHydrationWarning={true}
                         fontSize={{ base: "lg", sm: "md" }}
                         css={{ "--focus-color": "black" }}
                         _placeholder={{ color: "blackAlpha.600" }}
@@ -98,6 +99,7 @@ const Login = () => {
                       <Input
                         type="text"
                         placeholder="eg. Wike"
+                        suppressHydrationWarning={true}
                         fontSize={{ base: "lg", sm: "md" }}
                         css={{ "--focus-color": "black" }}
                         _placeholder={{ color: "blackAlpha.600" }}
@@ -118,6 +120,7 @@ const Login = () => {
                     </Field.Label>
                     <Input
                       type="text"
+                      suppressHydrationWarning={true}
                       placeholder="Enter your email"
                       fontSize={{ base: "lg", sm: "md" }}
                       css={{ "--focus-color": "black" }}
@@ -156,6 +159,7 @@ const Login = () => {
                     >
                       <Input
                         {...register("password")}
+                        suppressHydrationWarning={true}
                         type={eyestate ? "password" : "text"}
                         fontSize={{ base: "lg", sm: "md" }}
                         placeholder="Enter your password"
@@ -172,6 +176,7 @@ const Login = () => {
                     )}
                     <Button
                       type="submit"
+                      suppressHydrationWarning={true}
                       backgroundColor={"#633e27"}
                       alignItems={"center"}
                       marginTop={"2"}
@@ -195,10 +200,14 @@ const Login = () => {
               className="font-crismonText"
             >
               If you have an account !{" "}
-              <Link href={"/signUp"} className="text-black/90 font-bold">
-                <Box color={"black"} fontWeight={"bolder"}>
+              <Link href={"/"} className="text-black/90 font-bold">
+                <Button
+                  suppressHydrationWarning={true}
+                  color={"black"}
+                  fontWeight={"bolder"}
+                >
                   Login Here
-                </Box>
+                </Button>
               </Link>
             </Box>
           </Box>
