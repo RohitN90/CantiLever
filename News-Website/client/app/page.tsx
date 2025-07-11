@@ -55,8 +55,8 @@ const Login = () => {
         },
       );
 
-      console.log(response.status);
-      if (response.status === 201) {
+      console.log(response.data);
+      if (response.status === 200) {
         router.push("home");
       }
     } catch (error: any) {

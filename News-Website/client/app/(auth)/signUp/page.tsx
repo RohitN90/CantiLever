@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { zodiak, plus } from "@/public/fontExport";
 import { FaArrowRight } from "react-icons/fa6";
+import { useRouter } from "next/router";
 
 const schmea = z.object({
   firstname: z.string(),
@@ -31,6 +32,7 @@ const schmea = z.object({
 type IUser = z.infer<typeof schmea>;
 
 const Login = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -43,8 +45,38 @@ const Login = () => {
     setEyeState(!eyestate);
   };
 
-  const handleSubmitData: SubmitHandler<IUser> = (data) => {
-    console.log(data);
+  const handleSubmitData: SubmitHandler<IUser> = async (data, e: any) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/signUp",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      console.log(response.status);
+      if (response.status === 201) {
+        router.push("/");
+        return (
+          <>
+            <div>Successfully Login</div>
+          </>
+        );
+      }
+    } catch (error: any) {
+      console.log(error.message);
+      if (error.response) {
+        console.error("Error during sign-in:", error.response.data);
+        console.error("Status:", error.response.status);
+        console.error("Headers:", error.response.headers);
+      } else {
+        console.error("Error setting up request:", error.message);
+      }
+    }
   };
   return (
     <>

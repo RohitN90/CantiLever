@@ -47,7 +47,7 @@ const Signin = async (req: Request, res: Response) => {
     );
     res.cookie("Token", token);
     req.headers["Authorization"] = token;
-    res.status(201).json({
+    res.status(200).json({
       token: token,
     });
   } catch (error: any) {
