@@ -21,6 +21,7 @@ import Link from "next/link";
 import { zodiak, plus } from "@/public/fontExport";
 import { FaArrowRight } from "react-icons/fa6";
 import { useRouter } from "next/router";
+import { useAuthToken } from "@/store/store";
 
 const schmea = z.object({
   firstname: z.string(),
@@ -59,6 +60,9 @@ const Login = () => {
       );
 
       console.log(response.status);
+      useAuthToken((state) => {
+        state.setToken(response?.data as string);
+      });
       if (response.status === 201) {
         router.push("/");
         return (

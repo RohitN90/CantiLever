@@ -6,18 +6,25 @@ dotenv.config();
 
 const authication = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = await req.cookies.Token;
+    if (
+      req.headers["Authorization"] === undefined ||
+      req.headers["Authorization"] === null
+    ) {
+      res.status(401).json({ message: "Unauthorized" });
+    }
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      res.status(401).json({ message: "Unauthorized" });
+    }
+    const token = authHeader?.split(" ")[1];
     if (!token) {
-      res.status(401).json({
-        message: "Access denied",
-      });
+      res.status(401).json({ message: "Unauthorized" });
     }
     const decode = jwt.verify(token as string, `${process.env.JWT_SECRET}`);
     next();
   } catch (error) {
-    res.status(404).json({
-      error: "Invalid Token",
-    });
+    res.status(501).json({ message: "Unauthorized" });
+    console.log(error);
   }
 };
 
